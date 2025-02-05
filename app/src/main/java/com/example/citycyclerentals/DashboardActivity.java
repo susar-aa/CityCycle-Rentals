@@ -1,52 +1,54 @@
 package com.example.citycyclerentals;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.citycyclerentals.adapters.BikeAdapter;
-import com.example.citycyclerentals.models.Bike;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.citycyclerentals.adapters.ReservationConfirmedAdapter;
+import com.example.citycyclerentals.models.Reservation;
+
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DashboardActivity extends AppCompatActivity {
 
     private static final String TAG = "HomeActivity";
-    private static final String BIKE_URL = "http://192.168.1.2/get_bikes.php";
     private static final String URL = "http://192.168.1.2/get_promotions.php";
     private ViewFlipper promoFlipper;
-    private RecyclerView bikeRecyclerView;
     private RequestQueue requestQueue;
-    private BikeAdapter bikeAdapter;
-    private List<Bike> bikeList = new ArrayList<>();
+    private ListView reservationListView;
+    private ArrayList<Reservation> reservationList;
+    private ReservationConfirmedAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        reservationListView = findViewById(R.id.confirmedreservationListView);
+        reservationList = new ArrayList<>();
 
         promoFlipper = findViewById(R.id.promoflipper);
         requestQueue = Volley.newRequestQueue(this);
@@ -55,8 +57,6 @@ public class DashboardActivity extends AppCompatActivity {
         fetchPromotions();
 
         Button viewReservationsButton = findViewById(R.id.viewReservationsButton);
-
-        // Set an onClick listener to navigate to UserReservationActivity
         viewReservationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,13 +64,27 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (requestQueue != null) {
-            requestQueue.cancelAll(TAG);
+        SharedPreferences sharedPreferences = getSharedPreferences("UserDetails", MODE_PRIVATE);
+        String userIdString = sharedPreferences.getString("id", "");
+
+        Log.d("DashboardActivity", "Retrieved userId: " + userIdString);
+
+        if (userIdString.isEmpty()) {
+            Toast.makeText(this, "User ID not found!", Toast.LENGTH_SHORT).show();
+        } else {
+            try {
+                int userId = Integer.parseInt(userIdString);
+                Log.d("DashboardActivity", "Converted userId: " + userId);
+                if (userId != -1) {
+                    fetchReservations(userId);
+                } else {
+                    Toast.makeText(this, "Invalid User ID!", Toast.LENGTH_SHORT).show();
+                }
+            } catch (NumberFormatException e) {
+                Log.e("DashboardActivity", "Invalid User ID format: " + e.getMessage());
+                Toast.makeText(this, "Error processing User ID!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -82,9 +96,8 @@ public class DashboardActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.nav_profile) {
                     startActivity(new Intent(DashboardActivity.this, UserProfileActivity.class));
                     return true;
-                }else if (item.getItemId() == R.id.nav_dashboard) {
+                } else if (item.getItemId() == R.id.nav_dashboard) {
                     return true;
-
                 } else if (item.getItemId() == R.id.nav_home) {
                     startActivity(new Intent(DashboardActivity.this, HomeActivity.class));
                     return true;
@@ -94,19 +107,12 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 
-    private void showErrorToast(String message) {
-        Toast.makeText(DashboardActivity.this, message, Toast.LENGTH_SHORT).show();
-    }
-
     private void fetchPromotions() {
-        // Request a string response from the provided URL
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        // On success, display the data
                         try {
-                            // Convert JSON array to list of Promotion objects
                             List<Promotion> promotions = new ArrayList<>();
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject promoObject = response.getJSONObject(i);
@@ -114,15 +120,10 @@ public class DashboardActivity extends AppCompatActivity {
                                 String discountPercentage = promoObject.getString("discount_percentage");
                                 String endDate = promoObject.getString("end_date");
                                 String startDate = promoObject.getString("start_date");
-
-                                // Add each promotion to the list
                                 promotions.add(new Promotion(promoCode, discountPercentage, endDate, startDate));
                             }
-
-                            // Update the UI with the fetched promotions (for example, adding them to a ViewFlipper)
                             updatePromoFlipper(promotions);
-
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             Log.e(TAG, "JSON Parsing error", e);
                             Toast.makeText(DashboardActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
                         }
@@ -136,16 +137,12 @@ public class DashboardActivity extends AppCompatActivity {
                     }
                 });
 
-        // Add the request to the RequestQueue
-        jsonArrayRequest.setTag(TAG); // Tag to cancel requests later if needed
+        jsonArrayRequest.setTag(TAG);
         requestQueue.add(jsonArrayRequest);
     }
 
     private void updatePromoFlipper(List<Promotion> promotions) {
-        // Clear existing views in the flipper
         promoFlipper.removeAllViews();
-
-        // Inflate and add each promotion view
         for (Promotion promo : promotions) {
             LayoutInflater inflater = getLayoutInflater();
             View promoCard = inflater.inflate(R.layout.promo_card, promoFlipper, false);
@@ -153,14 +150,64 @@ public class DashboardActivity extends AppCompatActivity {
             TextView discountText = promoCard.findViewById(R.id.discountPercentage);
             TextView validDateText = promoCard.findViewById(R.id.validdate);
             TextView startdateText = promoCard.findViewById(R.id.startdate);
-
             promoCodeText.setText(promo.getPromoCode());
             discountText.setText(promo.getDiscountPercentage() + "% Off");
             startdateText.setText("Starting Date : " + promo.getStartDate());
             validDateText.setText("Ending Date : " + promo.getEndDate());
-
             promoFlipper.addView(promoCard);
         }
     }
 
+    private void fetchReservations(int userId) {
+        String url = "http://192.168.1.2/getReservations.php?userId=" + userId;
+
+        Log.d(TAG, "Fetching reservations from URL: " + url);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            reservationList.clear();
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject reservationObject = response.getJSONObject(i);
+                                String status = reservationObject.getString("status");
+
+                                // Only add the reservation if the status is "confirmed"
+                                if ("confirmed".equalsIgnoreCase(status)) {
+                                    int reservationId = reservationObject.getInt("reservation_id");
+                                    String name = reservationObject.getString("name");
+                                    String startDate = reservationObject.getString("start_date");
+                                    String endDate = reservationObject.getString("end_date");
+                                    double totalPrice = reservationObject.getDouble("total_price");
+                                    int bikeId = reservationObject.getInt("bike_id");
+                                    String bikeImageUrl = reservationObject.getString("bike_image_url");
+                                    String bikeName = reservationObject.getString("bike_name");
+
+                                    Reservation reservation = new Reservation(reservationId, name, startDate, endDate, totalPrice, status, bikeImageUrl, bikeName, bikeId);
+                                    reservationList.add(reservation);
+                                }
+                            }
+
+                            adapter = new ReservationConfirmedAdapter(DashboardActivity.this, reservationList);
+                            reservationListView.setAdapter(adapter);
+
+                        } catch (Exception e) {
+                            Log.e(TAG, "Error parsing response: " + e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e(TAG, "Error fetching reservations: " + error.getMessage());
+                        Toast.makeText(DashboardActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        requestQueue.add(jsonArrayRequest);
+    }
 }

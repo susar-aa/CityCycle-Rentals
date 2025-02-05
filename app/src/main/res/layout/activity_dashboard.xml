@@ -41,9 +41,33 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="View Reservations"
+                android:text="Reservation History"
                 android:background="@drawable/rounded_button"
                 android:layout_centerInParent="true" />
+
+            <TextView
+                android:id="@+id/txtreserveTitle"
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"
+                android:text="Ongoing Reservations"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:layout_marginBottom="10dp" />
+
+            <ListView
+                android:id="@+id/confirmedreservationListView"
+                android:layout_width="342dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="70dp"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="0.5dp"
+                android:elevation="10dp" />
+
 
 
         </LinearLayout>
