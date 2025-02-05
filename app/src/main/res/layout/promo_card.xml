@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:layout_gravity="center"
+    app:cardCornerRadius="20dp"
+    android:elevation="4dp">
+
+    <ImageView
+        android:id="@+id/promoIcon"
+        android:layout_width="76dp"
+        android:layout_height="70dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="12dp"
+        android:contentDescription="Promo Icon"
+        android:src="@drawable/discount_icon" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/promoCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Promo Code"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/discountPercentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Discount"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/startdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Starting Dates"
+            android:layout_marginBottom="8dp"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/validdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ending Dates"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray" />
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="totalPriceTextView" type="id" />
+    <item name="endDateTextView" type="id" />
+    <item name="startDateTextView" type="id" />
+    <item name="nameTextView" type="id" />
+    <item name="bikeImageView" type="id" />
+</resources>
