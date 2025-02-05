@@ -1,89 +1,109 @@
-package com.example.citycyclerentals.adapters;
+package com.example.citycyclerentals.adapters;// Inside your ReservationConfirmedAdapter class
 
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.ArrayAdapter;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.citycyclerentals.models.Reservation;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.citycyclerentals.R;
+import com.example.citycyclerentals.models.Reservation;
 
-import java.util.ArrayList;
+import org.json.JSONArray;
 
-public class ReservationConfirmedAdapter extends BaseAdapter {
+import java.util.List;
+
+public class ReservationConfirmedAdapter extends ArrayAdapter<Reservation> {
     private Context context;
-    private ArrayList<Reservation> reservationList;
+    private List<Reservation> reservationList;
 
-    public ReservationConfirmedAdapter(Context context, ArrayList<Reservation> reservationList) {
+    public ReservationConfirmedAdapter(Context context, List<Reservation> reservations) {
+        super(context, 0, reservations);
         this.context = context;
-        this.reservationList = reservationList;
+        this.reservationList = reservations;
     }
 
     @Override
-    public int getCount() {
-        return reservationList.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return reservationList.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.confirmed_reservation_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.reservation_item, parent, false);
         }
 
-        Reservation reservation = reservationList.get(position);
+        final Reservation reservation = reservationList.get(position);
+        TextView reservationName = convertView.findViewById(R.id.nameTextView);
+        TextView reservationStatus = convertView.findViewById(R.id.statusTextView);
 
-        TextView nameTextView = convertView.findViewById(R.id.nameTextView);
-        nameTextView.setText(reservation.getName());
+        reservationName.setText(reservation.getName());
+        reservationStatus.setText(reservation.getStatus());
 
-        TextView startDateTextView = convertView.findViewById(R.id.startDateTextView);
-        startDateTextView.setText(reservation.getStartDate());
-
-        TextView endDateTextView = convertView.findViewById(R.id.endDateTextView);
-        endDateTextView.setText(reservation.getEndDate());
-
-        TextView totalPriceTextView = convertView.findViewById(R.id.totalPriceTextView);
-        totalPriceTextView.setText(String.format("$%.2f", reservation.getTotalPrice()));
-
-        TextView statusTextView = convertView.findViewById(R.id.statusTextView);
-        statusTextView.setText(reservation.getStatus());
-
-        // Add TextView for Bike Name
-        TextView bikeNameTextView = convertView.findViewById(R.id.bikeNameTextView);
-        bikeNameTextView.setText(reservation.getBikeName()); // Set bike name
-
-        ImageView bikeImageView = convertView.findViewById(R.id.bikeImageView);
-
-        String imageUrl = reservation.getBikeImageUrl();
-        Log.d("ReservationAdapter", "Bike Image URL: " + imageUrl);
-
-        // Load the image using Glide
-        Glide.with(context)
-                .load(imageUrl)
-                .placeholder(R.drawable.error_placeholder_image) // Ensure this exists in drawable
-                .error(R.drawable.error_placeholder_image) // Ensure this exists in drawable
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(bikeImageView);
+        // Set OnClickListener for reservation item
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle the PopupMenu based on reservation status
+                showPopupMenu(v, reservation);
+            }
+        });
 
         return convertView;
     }
 
+    private void showPopupMenu(View view, Reservation reservation) {
+        PopupMenu popupMenu = new PopupMenu(context, view);
 
+        // Show options based on reservation status
+        if ("pending".equalsIgnoreCase(reservation.getStatus())) {
+            popupMenu.getMenu().add("Cancel Reservation");
+        } else if ("confirmed".equalsIgnoreCase(reservation.getStatus())) {
+            popupMenu.getMenu().add("End Reservation");
+        }
 
+        // Set click listener for the menu options
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if ("Cancel Reservation".equals(item.getTitle())) {
+                    updateReservationStatus(reservation.getReservationId(), "canceled");
+                } else if ("End Reservation".equals(item.getTitle())) {
+                    updateReservationStatus(reservation.getReservationId(), "ended");
+                }
+                return true;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+    private void updateReservationStatus(int reservationId, String newStatus) {
+        String url = "http://192.168.1.2/updateReservationStatus.php?reservationId=" + reservationId + "&status=" + newStatus;
+
+        // Make a request to update the reservation status
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Handle response (e.g., update list and notify the adapter)
+                        Toast.makeText(context, "Reservation status updated to " + newStatus, Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Reservation", "Error updating status", error);
+                        Toast.makeText(context, "Error updating status", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        Volley.newRequestQueue(context).add(jsonArrayRequest);
+    }
 }

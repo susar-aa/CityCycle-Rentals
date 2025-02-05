@@ -88,17 +88,22 @@ public class UserReservationActivity extends AppCompatActivity {
                                 String endDate = reservationObject.getString("end_date");
                                 double totalPrice = reservationObject.getDouble("total_price");
                                 String status = reservationObject.getString("status");
-                                int bikeId = reservationObject.getInt("bike_id");
-                                String bikeImageUrl = reservationObject.getString("bike_image_url");
-                                String bikeName = reservationObject.getString("bike_name");
 
-                                Log.d("UserReservationActivity", "Bike Image URL: " + bikeImageUrl);
+                                // Only add the reservation if the status is "paid"
+                                if ("paid".equalsIgnoreCase(status) || "canceled".equalsIgnoreCase(status)){
+                                    int bikeId = reservationObject.getInt("bike_id");
+                                    String bikeImageUrl = reservationObject.getString("bike_image_url");
+                                    String bikeName = reservationObject.getString("bike_name");
 
-                                // Create Reservation object
-                                Reservation reservation = new Reservation(reservationId, name, startDate, endDate, totalPrice, status, bikeImageUrl, bikeName, bikeId);
-                                reservationList.add(reservation);
+                                    Log.d("UserReservationActivity", "Bike Image URL: " + bikeImageUrl);
+
+                                    // Create Reservation object
+                                    Reservation reservation = new Reservation(reservationId, name, startDate, endDate, totalPrice, status, bikeImageUrl, bikeName, bikeId);
+                                    reservationList.add(reservation);
+                                }
                             }
 
+                            // Update the adapter with the filtered reservation list
                             adapter = new ReservationAdapter(UserReservationActivity.this, reservationList);
                             reservationListView.setAdapter(adapter);
 
@@ -118,4 +123,5 @@ public class UserReservationActivity extends AppCompatActivity {
 
         requestQueue.add(jsonArrayRequest);
     }
+
 }

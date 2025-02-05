@@ -8,8 +8,10 @@ public class Reservation {
     private double totalPrice;
     private String status;
     private String bikeImageUrl;
-    private String bikeName; // Add bikeName
+    private String bikeName;
     private int bikeId;
+
+    private double discount;
 
     // Updated constructor with bikeName
     public Reservation(int reservationId, String name, String startDate, String endDate, double totalPrice, String status, String bikeImageUrl,String bikeName, int bikeId) {
@@ -22,6 +24,7 @@ public class Reservation {
         this.bikeImageUrl = bikeImageUrl;
         this.bikeName = bikeName;
         this.bikeId = bikeId;
+        this.discount = discount;
     }
 
     // Getters
@@ -51,6 +54,10 @@ public class Reservation {
 
     public String getBikeImageUrl() {
         return bikeImageUrl;
+    }
+
+    public double getDiscount() {
+        return discount;
     }
 
     public String getBikeName() {

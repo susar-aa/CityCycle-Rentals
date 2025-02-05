@@ -21,7 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.citycyclerentals.adapters.ReservationConfirmedAdapter;
+import com.example.citycyclerentals.adapters.DashboardReservationAdapter;  // Use DashboardReservationAdapter here
 import com.example.citycyclerentals.models.Reservation;
 
 import org.json.JSONArray;
@@ -40,7 +40,7 @@ public class DashboardActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private ListView reservationListView;
     private ArrayList<Reservation> reservationList;
-    private ReservationConfirmedAdapter adapter;
+    private DashboardReservationAdapter adapter;  // Use DashboardReservationAdapter here
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,29 +170,47 @@ public class DashboardActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            reservationList.clear();
+                            reservationList.clear();  // Clear previous data
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject reservationObject = response.getJSONObject(i);
+
+                                int reservationId = reservationObject.getInt("reservation_id");
+                                String name = reservationObject.getString("name");
+                                String startDate = reservationObject.getString("start_date");
+                                String endDate = reservationObject.getString("end_date");
+                                double totalPrice = reservationObject.getDouble("total_price");
                                 String status = reservationObject.getString("status");
 
-                                // Only add the reservation if the status is "confirmed"
-                                if ("confirmed".equalsIgnoreCase(status)) {
-                                    int reservationId = reservationObject.getInt("reservation_id");
-                                    String name = reservationObject.getString("name");
-                                    String startDate = reservationObject.getString("start_date");
-                                    String endDate = reservationObject.getString("end_date");
-                                    double totalPrice = reservationObject.getDouble("total_price");
+                                // Only add the reservation if the status is "confirmed" or "pending"
+                                if ("confirmed".equalsIgnoreCase(status) || "pending".equalsIgnoreCase(status)) {
                                     int bikeId = reservationObject.getInt("bike_id");
                                     String bikeImageUrl = reservationObject.getString("bike_image_url");
                                     String bikeName = reservationObject.getString("bike_name");
 
+                                    // Create Reservation object
                                     Reservation reservation = new Reservation(reservationId, name, startDate, endDate, totalPrice, status, bikeImageUrl, bikeName, bikeId);
                                     reservationList.add(reservation);
                                 }
                             }
 
-                            adapter = new ReservationConfirmedAdapter(DashboardActivity.this, reservationList);
+                            // Update the adapter with the filtered reservation list
+                            adapter = new DashboardReservationAdapter(DashboardActivity.this, reservationList);  // Use DashboardReservationAdapter here
                             reservationListView.setAdapter(adapter);
+
+                            // Set item click listener
+                            reservationListView.setOnItemClickListener((parent, view, position, id) -> {
+                                Reservation clickedReservation = reservationList.get(position);
+                                Intent intent = new Intent(DashboardActivity.this, ReservationDetailActivity.class);
+                                intent.putExtra("reservation_id", clickedReservation.getReservationId());
+                                intent.putExtra("bike_name", clickedReservation.getBikeName());
+                                intent.putExtra("start_date", clickedReservation.getStartDate());
+                                intent.putExtra("end_date", clickedReservation.getEndDate());
+                                intent.putExtra("total_price", clickedReservation.getTotalPrice());
+                                intent.putExtra("status", clickedReservation.getStatus());
+                                intent.putExtra("bike_image_url", clickedReservation.getBikeImageUrl());
+                                intent.putExtra("discount", clickedReservation.getDiscount());
+                                startActivity(intent);
+                            });
 
                         } catch (Exception e) {
                             Log.e(TAG, "Error parsing response: " + e.getMessage());

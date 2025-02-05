@@ -1,6 +1,7 @@
 package com.example.citycyclerentals;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -104,6 +105,27 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             if (response.equals("success")) {
+                // Assume the server returns user data upon successful registration
+                // You can parse the user data from the response, or assume it if you know the format
+                // For example:
+                String userId = "1";  // Example user ID (you may want to extract this from the server response)
+                String username = edtUsername.getText().toString().trim();
+                String email = edtEmail.getText().toString().trim();
+                String phone = edtPhone.getText().toString().trim();
+
+                // Save user data in SharedPreferences
+                SharedPreferences sharedPreferences = getSharedPreferences("UserDetails", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("id", userId);  // Save the user ID
+                editor.putString("username", username);  // Save the username
+                editor.putString("email", email);  // Save the email
+                editor.putString("phone", phone);  // Save the phone number
+                editor.putString("role", "user");  // Store the role (which is user by default)
+                editor.apply();  // Commit the changes to SharedPreferences
+
+                Log.d("Register", "User details saved in SharedPreferences");
+
+                // Navigate to HomeActivity after successful registration
                 Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(RegisterActivity.this, HomeActivity.class));  // Redirect to home screen
                 finish();
@@ -117,6 +139,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
     }
+
 
     private class RegisterErrorListener implements Response.ErrorListener {
         @Override
