@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="totalPriceTextView" type="id" />
+    <item name="endDateTextView" type="id" />
+    <item name="startDateTextView" type="id" />
+    <item name="nameTextView" type="id" />
+    <item name="bikeImageView" type="id" />
+    <item name="pricing" type="id" />
+    <item name="pricingSection" type="id" />
+    <item name="hourlyPriceCard" type="id" />
+    <item name="dailyPriceCard" type="id" />
+    <item name="monthlyPriceCard" type="id" />
+</resources>

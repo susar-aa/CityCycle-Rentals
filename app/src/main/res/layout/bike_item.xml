@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    android:padding="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <!-- Linear layout to hold bike item details -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <!-- Bike image -->
+        <ImageView
+            android:id="@+id/bikeImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Bike name -->
+        <TextView
+            android:id="@+id/bikeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bike Name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Hourly price -->
+        <TextView
+            android:id="@+id/price_hourly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hourly Price: 100 LKR"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Bike type -->
+        <TextView
+            android:id="@+id/bikeType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bike Type"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp" />
+
+        <!-- Station name -->
+        <TextView
+            android:id="@+id/stationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Station Name"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,14 @@
+<resources>
+    <string-array name="payment_methods">
+        <item>Cash</item>
+        <item>Card</item>
+        <item>Online</item>
+    </string-array>
+
+    <string-array name="card_types">
+        <item>Visa</item>
+        <item>MasterCard</item>
+        <item>Amex</item>
+    </string-array>
+    <string name="app_name">CityCycle Rentals</string>
+</resources>
