@@ -8,7 +8,24 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.citycyclerentals.adapters.ReservedTimesAdapter;
+import com.example.citycyclerentals.models.ReservedTime;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BikeDetailActivity extends AppCompatActivity {
 
@@ -47,14 +64,17 @@ public class BikeDetailActivity extends AppCompatActivity {
         // Set data to UI components
         bikeName.setText(name);
         bikeType.setText("Type: " + type);
-        stationName.setText("Station: " + station);
-        priceHourly.setText("Hourly: Rs: " + hourly);
-        priceDaily.setText("Daily: Rs: " + daily);
-        priceMonthly.setText("Monthly: Rs: " + monthly);
+        stationName.setText("Location   : " + station);
+        priceHourly.setText("Hourly Price  : Rs: " + hourly);
+        priceDaily.setText("Daily Price  : Rs: " + daily);
+        priceMonthly.setText("Monthly Price  : Rs: " + monthly);
         statusText.setText("Status: " + status);
 
         // Load image using Glide
         Glide.with(this).load(imageUrl).into(bikeImage);
+
+        // Load reserved times for the bike
+        loadReservedTimes(bikeId);
 
         // Save the bike_id to SharedPreferences
         SharedPreferences bikePreferences = getSharedPreferences("BikeDetails", MODE_PRIVATE);
@@ -83,4 +103,48 @@ public class BikeDetailActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void loadReservedTimes(final int bikeId) {
+        // Create a list to hold the reserved times
+        final List<ReservedTime> reservedTimes = new ArrayList<>();
+
+        // Fetch data from the database (using a background thread or AsyncTask)
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.168.1.2/fetch_reserved_times.php?bike_id=" + bikeId,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject reservation = jsonArray.getJSONObject(i);
+                                String startDate = reservation.getString("start_date");
+                                String endDate = reservation.getString("end_date");
+                                String status = reservation.getString("status");
+
+                                // Add the reserved time to the list
+                                reservedTimes.add(new ReservedTime(startDate, endDate, status));
+                            }
+
+                            // Set up the RecyclerView adapter with the data
+                            ReservedTimesAdapter adapter = new ReservedTimesAdapter(reservedTimes);
+                            RecyclerView recyclerView = findViewById(R.id.reservedTimesRecyclerView);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(BikeDetailActivity.this));
+                            recyclerView.setAdapter(adapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                });
+
+        // Add the request to the queue
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
 }
