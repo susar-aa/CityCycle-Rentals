@@ -13,6 +13,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".EditReservationDialogFragment"
+            android:exported="false" />
+        <activity
+            android:name=".ManageReservationsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ReservationDetailActivity"
             android:exported="false" />
         <activity
@@ -38,12 +44,12 @@
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" /> <!-- Activities -->
+            android:exported="false" />
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminPanelActivity"
+            android:name=".admin.AdminPanelActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

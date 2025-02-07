@@ -11,4 +11,13 @@
         <item>Amex</item>
     </string-array>
     <string name="app_name">CityCycle Rentals</string>
+
+    <string-array name="status_array">
+        <item>pending</item>
+        <item>confirmed</item>
+        <item>paid</item>
+        <item>ended</item>
+        <item>canceled</item>
+    </string-array>
+
 </resources>
