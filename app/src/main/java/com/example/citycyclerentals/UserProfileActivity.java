@@ -109,7 +109,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
     // Method to display available cards for the logged-in user based on the userId
     private void displayUserCards(String userId) {
-        // TODO: Query your database or retrieve data that matches the logged-in user's ID
         if (userId != null && !userId.isEmpty()) {
             // Your logic to display user-specific cards
         } else {

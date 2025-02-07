@@ -64,10 +64,10 @@ public class BikeDetailActivity extends AppCompatActivity {
         // Set data to UI components
         bikeName.setText(name);
         bikeType.setText("Type: " + type);
-        stationName.setText("Location   : " + station);
-        priceHourly.setText("Hourly Price  : Rs: " + hourly);
-        priceDaily.setText("Daily Price  : Rs: " + daily);
-        priceMonthly.setText("Monthly Price  : Rs: " + monthly);
+        stationName.setText("Station: " + station);
+        priceHourly.setText("Hourly: Rs: " + hourly);
+        priceDaily.setText("Daily: Rs: " + daily);
+        priceMonthly.setText("Monthly: Rs: " + monthly);
         statusText.setText("Status: " + status);
 
         // Load image using Glide
@@ -119,10 +119,9 @@ public class BikeDetailActivity extends AppCompatActivity {
                                 JSONObject reservation = jsonArray.getJSONObject(i);
                                 String startDate = reservation.getString("start_date");
                                 String endDate = reservation.getString("end_date");
-                                String status = reservation.getString("status");
 
                                 // Add the reserved time to the list
-                                reservedTimes.add(new ReservedTime(startDate, endDate, status));
+                                reservedTimes.add(new ReservedTime(startDate, endDate));
                             }
 
                             // Set up the RecyclerView adapter with the data

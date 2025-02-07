@@ -29,9 +29,8 @@ public class ReservedTimesAdapter extends RecyclerView.Adapter<ReservedTimesAdap
     @Override
     public void onBindViewHolder(ReservedTimeViewHolder holder, int position) {
         ReservedTime reservedTime = reservedTimes.get(position);
-        holder.startDateTextView.setText("From  : " + reservedTime.getStartDate());
-        holder.endDateTextView.setText("To  : " + reservedTime.getEndDate());
-        holder.statusTextView.setText("Status  : " + reservedTime.getStatus());
+        holder.startDateTextView.setText("Start: " + reservedTime.getStartDate());
+        holder.endDateTextView.setText("End: " + reservedTime.getEndDate());
     }
 
     @Override
@@ -41,13 +40,12 @@ public class ReservedTimesAdapter extends RecyclerView.Adapter<ReservedTimesAdap
 
     public static class ReservedTimeViewHolder extends RecyclerView.ViewHolder {
 
-        TextView startDateTextView, endDateTextView, statusTextView;
+        TextView startDateTextView, endDateTextView;
 
         public ReservedTimeViewHolder(View itemView) {
             super(itemView);
             startDateTextView = itemView.findViewById(R.id.startDateTextView);
             endDateTextView = itemView.findViewById(R.id.endDateTextView);
-            statusTextView = itemView.findViewById(R.id.statusTextView);
         }
     }
 }

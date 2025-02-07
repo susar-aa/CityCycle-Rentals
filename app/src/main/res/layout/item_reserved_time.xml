@@ -2,56 +2,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="16dp"
+    app:cardCornerRadius="12dp"
     app:cardElevation="6dp"
-    android:layout_margin="15dp"
+    android:layout_marginTop="10dp"
     android:backgroundTint="@color/white">
 
-<LinearLayout
-android:orientation="vertical"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-android:padding="16dp"
-    android:gravity="center_horizontal">
-
-    <!-- Start Date -->
-<TextView
-android:id="@+id/startDateTextView"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Start Date:"
-android:textSize="17sp"
-    android:textColor="@color/black"
-    android:layout_marginBottom="5dp"/>
-
-    <!-- End Date -->
-<TextView
-android:id="@+id/endDateTextView"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="End Date:"
-android:textSize="17sp"
-    android:textColor="@color/black"
-    android:layout_marginBottom="5dp"/>
-
-    <!-- Status -->
-
-    <!-- Add an optional line separator for style (Optional) -->
-    <TextView
-        android:id="@+id/statusTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:textStyle="bold"
-        android:text="Status:"
-        android:textColor="@color/green"
-        android:textSize="17sp" />
+        android:padding="12dp">
 
-    <View
-android:layout_width="match_parent"
-android:layout_height="1dp"
-android:layout_marginTop="10dp"
-android:background="@color/light_gray" />
+        <TextView
+            android:id="@+id/startDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/endDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp" />
     </LinearLayout>
-    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>
