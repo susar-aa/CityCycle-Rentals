@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(final String email, final String password) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.1.2/login.php", // Adjust URL
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.1.2/CityCycle%20Rentals/login.php", // Adjust URL
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

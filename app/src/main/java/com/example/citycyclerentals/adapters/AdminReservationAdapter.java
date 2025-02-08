@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.citycyclerentals.R;
 import com.example.citycyclerentals.models.ReservationAdmin;
 
@@ -37,13 +39,13 @@ public class AdminReservationAdapter extends ArrayAdapter<ReservationAdmin> {
         }
 
         TextView tvName = convertView.findViewById(R.id.tvName);
-        TextView tvcontactnumber = convertView.findViewById(R.id.tvcontactnumber);
         TextView tvStartDate = convertView.findViewById(R.id.tvStartDate);
         TextView tvEndDate = convertView.findViewById(R.id.tvEndDate);
         TextView tvTotalPrice = convertView.findViewById(R.id.tvTotalPrice);
         Spinner spStatus = convertView.findViewById(R.id.spStatus);
         Button btnEdit = convertView.findViewById(R.id.btnEdit);
         Button btnDelete = convertView.findViewById(R.id.btnDelete);
+        ImageView ivBikeImage = convertView.findViewById(R.id.ivBikeImage);
 
         tvName.setText(reservation.getName());
         tvStartDate.setText(reservation.getStartDate());
@@ -70,6 +72,13 @@ public class AdminReservationAdapter extends ArrayAdapter<ReservationAdmin> {
                 // Do nothing
             }
         });
+
+        // Load bike image using Glide
+        Glide.with(getContext())
+                .load(reservation.getBikeImageUrl())
+                .placeholder(R.drawable.error_placeholder_image)
+                .error(R.drawable.error_placeholder_image)
+                .into(ivBikeImage);
 
         return convertView;
     }

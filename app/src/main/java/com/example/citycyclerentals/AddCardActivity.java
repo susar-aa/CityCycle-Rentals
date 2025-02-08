@@ -21,7 +21,7 @@ public class AddCardActivity extends AppCompatActivity {
     private EditText etCardNumber, etExpiryDate, etCardHolder, etCVV;
     private Button btnSaveCard;
     private static final String TAG = "AddCardActivity";
-    private static final String SAVE_CARD_URL = "http://192.168.1.2/save_card.php";  // Define the URL here
+    private static final String SAVE_CARD_URL = "http://192.168.1.2/CityCycle%20Rentals/save_card.php";  // Define the URL here
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

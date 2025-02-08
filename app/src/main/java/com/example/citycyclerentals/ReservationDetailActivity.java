@@ -73,7 +73,7 @@ public class ReservationDetailActivity extends AppCompatActivity {
     }
 
     private void cancelReservation(int reservationId) {
-        String url = "http://192.168.1.2/cancel_reservation.php?reservation_id=" + reservationId;
+        String url = "http://192.168.1.2/CityCycle%20Rentals/cancel_reservation.php?reservation_id=" + reservationId;
 
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

@@ -174,7 +174,7 @@ public class ReservationActivity extends BaseActivity {
                     long diffInMillis = endDate.getTime() - startDate.getTime();
                     long diffInHours = diffInMillis / (1000 * 60 * 60); // Calculate hours difference
 
-                    String url = "http://192.168.1.2/insert_reservation.php";  // Replace with your server URL
+                    String url = "http://192.168.1.2/CityCycle%20Rentals/insert_reservation.php";  // Replace with your server URL
 
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
                         Log.d("ReservationResponse", "Server Response: " + response);
@@ -241,7 +241,7 @@ public class ReservationActivity extends BaseActivity {
         String userId = sharedPreferences.getString("id", null);
 
         if (userId != null) {
-            String url = "http://192.168.1.2/get_user_cards.php";  // Replace with your server URL
+            String url = "http://192.168.1.2/CityCycle%20Rentals/get_user_cards.php";  // Replace with your server URL
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
                 try {

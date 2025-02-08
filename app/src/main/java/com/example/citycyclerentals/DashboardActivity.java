@@ -35,7 +35,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class DashboardActivity extends AppCompatActivity {
 
     private static final String TAG = "HomeActivity";
-    private static final String URL = "http://192.168.1.2/get_promotions.php";
+    private static final String URL = "http://192.168.1.2/CityCycle%20Rentals/get_promotions.php";
     private ViewFlipper promoFlipper;
     private RequestQueue requestQueue;
     private ListView reservationListView;
@@ -159,7 +159,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void fetchReservations(int userId) {
-        String url = "http://192.168.1.2/getReservations.php?userId=" + userId;
+        String url = "http://192.168.1.2/CityCycle%20Rentals/getReservations.php?userId=" + userId;
 
         Log.d(TAG, "Fetching reservations from URL: " + url);
 

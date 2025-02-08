@@ -1,4 +1,4 @@
-package com.example.citycyclerentals;
+package com.example.citycyclerentals.admin;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.citycyclerentals.EditReservationDialogFragment;
+import com.example.citycyclerentals.R;
 import com.example.citycyclerentals.adapters.AdminReservationAdapter;
 import com.example.citycyclerentals.models.ReservationAdmin;
 
@@ -24,9 +26,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class ManageReservationsActivity extends AppCompatActivity implements AdminReservationAdapter.OnEditClickListener, AdminReservationAdapter.OnDeleteClickListener, AdminReservationAdapter.OnStatusChangeListener {
+public class ConfirmedReservationActivity extends AppCompatActivity implements AdminReservationAdapter.OnEditClickListener, AdminReservationAdapter.OnDeleteClickListener, AdminReservationAdapter.OnStatusChangeListener {
 
-    private static final String TAG = "ManageReservationsActivity";
+    private static final String TAG = "ConfirmedReservationActivity";
 
     private ListView listView;
     private SearchView searchView;
@@ -37,7 +39,7 @@ public class ManageReservationsActivity extends AppCompatActivity implements Adm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_reservations);
+        setContentView(R.layout.activity_confirmed_reservations);
 
         listView = findViewById(R.id.listView);
         searchView = findViewById(R.id.searchView);
@@ -119,7 +121,7 @@ public class ManageReservationsActivity extends AppCompatActivity implements Adm
         @Override
         protected String doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.1.2/CityCycle%20Rentals/get_reservations.php");
+                URL url = new URL("http://192.168.1.2/CityCycle%20Rentals/confirmed_reservations.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
 
@@ -177,10 +179,10 @@ public class ManageReservationsActivity extends AppCompatActivity implements Adm
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(ManageReservationsActivity.this, "Error parsing JSON", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfirmedReservationActivity.this, "Error parsing JSON", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(ManageReservationsActivity.this, "Error fetching reservations", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ConfirmedReservationActivity.this, "Error fetching reservations", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -229,13 +231,13 @@ public class ManageReservationsActivity extends AppCompatActivity implements Adm
             Log.d(TAG, "UpdateReservationTask result: " + result);
             if (result != null) {
                 if (result.trim().equalsIgnoreCase("Reservation updated successfully")) {
-                    Toast.makeText(ManageReservationsActivity.this, result, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfirmedReservationActivity.this, result, Toast.LENGTH_SHORT).show();
                     fetchReservations();
                 } else {
-                    Toast.makeText(ManageReservationsActivity.this, "Error updating reservation: " + result, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfirmedReservationActivity.this, "Error updating reservation: " + result, Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(ManageReservationsActivity.this, "Error updating reservation", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ConfirmedReservationActivity.this, "Error updating reservation", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -280,13 +282,13 @@ public class ManageReservationsActivity extends AppCompatActivity implements Adm
             Log.d(TAG, "DeleteReservationTask result: " + result);
             if (result != null) {
                 if (result.trim().equalsIgnoreCase("Reservation deleted successfully")) {
-                    Toast.makeText(ManageReservationsActivity.this, result, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfirmedReservationActivity.this, result, Toast.LENGTH_SHORT).show();
                     fetchReservations();
                 } else {
-                    Toast.makeText(ManageReservationsActivity.this, "Error deleting reservation: " + result, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfirmedReservationActivity.this, "Error deleting reservation: " + result, Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(ManageReservationsActivity.this, "Error deleting reservation", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ConfirmedReservationActivity.this, "Error deleting reservation", Toast.LENGTH_SHORT).show();
             }
         }
     }

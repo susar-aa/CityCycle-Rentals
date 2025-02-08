@@ -31,7 +31,7 @@ import java.util.List;
 public class HomeActivity extends BaseActivity implements BikeAdapter.OnBikeClickListener {
 
     private static final String TAG = "HomeActivity";
-    private static final String BIKE_URL = "http://192.168.1.2/get_bikes.php";
+    private static final String BIKE_URL = "http://192.168.1.2/CityCycle%20Rentals/get_bikes.php";
     private RecyclerView bikeRecyclerView;
     private RequestQueue requestQueue;
     private BikeAdapter bikeAdapter;
