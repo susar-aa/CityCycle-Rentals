@@ -31,7 +31,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtEmail, edtPassword;
     private Button btnLogin;
     private ProgressBar progressBar;
-    private TextView txtCreateAccount; // New TextView for Create Account
+    private TextView txtCreateAccount, txtForgotPassword; // New TextView for Forgot Password
+
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         progressBar = findViewById(R.id.progressBar);
         txtCreateAccount = findViewById(R.id.txtCreateAccount); // Initialize Create Account TextView
+        txtForgotPassword = findViewById(R.id.txtForgotPassword); // Initialize Forgot Password TextView
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +74,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Handle "Forgot Password?" click
+        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to ForgotPasswordActivity
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void loginUser(final String email, final String password) {
@@ -82,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         try {
                             // Log the response for debugging
-                            System.out.println("Response: " + response);
+                            Log.d(TAG, "Response: " + response);
                             JSONObject userData = new JSONObject(response);
 
                             if (userData.has("error")) {
@@ -93,15 +105,19 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences sharedPreferences = getSharedPreferences("UserDetails", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 String userId = userData.getString("id"); // Get user ID from the response
-                                Log.d("UserID", "Logged in user ID: " + userId);
+                                Log.d(TAG, "Logged in user ID: " + userId);
 
                                 // Store the received user data in SharedPreferences
                                 editor.putString("id", userData.getString("id"));
                                 editor.putString("username", userData.getString("username"));
                                 editor.putString("email", userData.getString("email"));
-                                editor.putString("phone", userData.optString("phone", "")); // Handle null phone gracefully
+                                editor.putString("phone", userData.optString("phone_number", "")); // Handle null phone gracefully
                                 editor.putString("role", userData.getString("role"));
+                                String profilePictureUrl = userData.optString("profile_picture", "");
+                                editor.putString("profile_picture", profilePictureUrl); // Handle null profile picture gracefully
                                 editor.apply();
+
+                                Log.d(TAG, "Profile picture URL: " + profilePictureUrl);
 
                                 // Navigate based on user role
                                 String role = userData.getString("role");
@@ -123,6 +139,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressBar.setVisibility(View.GONE);  // Hide progress bar if error occurs
+                        Log.e(TAG, "Error connecting to server", error);
                         Toast.makeText(LoginActivity.this, "Error connecting to server", Toast.LENGTH_SHORT).show();
                     }
                 }) {

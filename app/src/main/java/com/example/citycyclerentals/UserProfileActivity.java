@@ -3,6 +3,7 @@ package com.example.citycyclerentals;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.squareup.picasso.Picasso;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -21,6 +23,8 @@ public class UserProfileActivity extends AppCompatActivity {
     private ImageView imgProfilePic;
     private Button btnManageProfile, btnManagePayment;
     private String userId; // Retrieve the logged-in user's ID from SharedPreferences
+
+    private static final String TAG = "UserProfileActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,7 @@ public class UserProfileActivity extends AppCompatActivity {
         txtUsername = findViewById(R.id.txtUsername);
         txtEmail = findViewById(R.id.txtEmail);
         txtPhone = findViewById(R.id.txtPhone);
-        imgProfilePic = findViewById(R.id.imgProfilePic); // Add ImageView for profile picture
+        imgProfilePic = findViewById(R.id.imgProfilePic);
         btnManageProfile = findViewById(R.id.btnManageProfile);
         btnManagePayment = findViewById(R.id.btnManagePayment);
 
@@ -97,11 +101,12 @@ public class UserProfileActivity extends AppCompatActivity {
         txtEmail.setText(email);
         txtPhone.setText(phone_number);
 
-        // Load the profile picture (you can use Glide or Picasso to load images from URL)
+        // Log the profile picture URL for debugging
+        Log.d(TAG, "Profile picture URL: " + profilePicUrl);
+
+        // Load the profile picture using Picasso
         if (!profilePicUrl.isEmpty()) {
-            // You can use libraries like Glide or Picasso to load images
-            // Glide.with(this).load(profilePicUrl).into(imgProfilePic);
-            // Picasso.get().load(profilePicUrl).into(imgProfilePic);
+            Picasso.get().load(profilePicUrl).into(imgProfilePic);
         } else {
             imgProfilePic.setImageResource(R.drawable.profile_placeholder_image); // Default placeholder image
         }
@@ -127,6 +132,7 @@ public class UserProfileActivity extends AppCompatActivity {
             String updatedUsername = data.getStringExtra("updatedUsername");
             String updatedEmail = data.getStringExtra("updatedEmail");
             String updatedPhone = data.getStringExtra("updatedPhone");
+            String updatedProfilePicture = data.getStringExtra("updatedProfilePicture");
 
             // Update SharedPreferences with new data
             SharedPreferences sharedPreferences = getSharedPreferences("UserDetails", MODE_PRIVATE);
@@ -134,7 +140,11 @@ public class UserProfileActivity extends AppCompatActivity {
             editor.putString("username", updatedUsername);
             editor.putString("email", updatedEmail);
             editor.putString("phone_number", updatedPhone);
+            editor.putString("profile_picture", updatedProfilePicture);
             editor.apply();
+
+            // Log the updated profile picture URL for debugging
+            Log.d(TAG, "Updated profile picture URL: " + updatedProfilePicture);
 
             // Reload the user profile data with the updated information
             loadUserProfileData();
@@ -156,15 +166,16 @@ public class UserProfileActivity extends AppCompatActivity {
                     // Handle home item click (already on Profile)
                     return true;
                 } else if (item.getItemId() == R.id.nav_home) {
-                        // Navigate to HomeActivity when Home button is clicked
-                        Intent homeIntent = new Intent(UserProfileActivity.this, HomeActivity.class);
-                        startActivity(homeIntent);
-                        finish();
-                        return true;
-                    }else if (item.getItemId() == R.id.nav_dashboard) {
+                    // Navigate to HomeActivity when Home button is clicked
+                    Intent homeIntent = new Intent(UserProfileActivity.this, HomeActivity.class);
+                    startActivity(homeIntent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.nav_dashboard) {
                     startActivity(new Intent(UserProfileActivity.this, DashboardActivity.class));
-
-                }return false;
+                    return true;
+                }
+                return false;
             }
         });
     }

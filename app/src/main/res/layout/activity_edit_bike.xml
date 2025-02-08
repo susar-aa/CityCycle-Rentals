@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".admin.EditBikeActivity">
+
+    <EditText
+        android:id="@+id/bike_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Bike Name"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/bike_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Bike Type"
+        android:layout_below="@id/bike_name"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/bike_price_hourly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Hourly Price"
+        android:layout_below="@id/bike_type"
+        android:layout_margin="16dp"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/bike_price_daily"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Daily Price"
+        android:layout_below="@id/bike_price_hourly"
+        android:layout_margin="16dp"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/bike_price_monthly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Monthly Price"
+        android:layout_below="@id/bike_price_daily"
+        android:layout_margin="16dp"
+        android:inputType="numberDecimal" />
+
+    <ImageView
+        android:id="@+id/bike_image"
+        android:layout_width="210dp"
+        android:layout_height="125dp"
+        android:layout_below="@id/bike_price_monthly"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop" />
+
+    <Button
+        android:id="@+id/upload_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Image"
+        android:layout_below="@id/bike_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp" />
+
+    <Spinner
+        android:id="@+id/station_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/upload_image_button"
+        android:layout_margin="16dp" />
+
+    <Button
+        android:id="@+id/update_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Bike"
+        android:layout_below="@id/station_spinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+</RelativeLayout>
