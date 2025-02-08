@@ -36,5 +36,23 @@ public class AdminPanelActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button ManageAdminsButton = findViewById(R.id.manageadminbutton);
+        ManageAdminsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminPanelActivity.this, ManageAdminsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button ManageBikesButton = findViewById(R.id.managebikesbutton);
+        ManageBikesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminPanelActivity.this, OtherBikesActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

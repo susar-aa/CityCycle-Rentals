@@ -1,6 +1,8 @@
 package com.example.citycyclerentals.models;
 
-public class Bike {
+import java.io.Serializable;
+
+public class Bike implements Serializable {
     private int id;
     private String name;
     private boolean isAvailable;  // Availability is now a boolean

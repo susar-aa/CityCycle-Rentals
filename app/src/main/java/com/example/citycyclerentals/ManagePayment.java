@@ -32,7 +32,7 @@ public class ManagePayment extends AppCompatActivity {
     private ImageButton btnBack;
 
     // Constants for URL and SharedPreferences
-    private static final String BASE_URL = "http://192.168.1.2/"; // Base URL for API
+    private static final String BASE_URL = "http://192.168.1.2/CityCycle%20Rentals"; // Base URL for API
     private static final String FETCH_CARDS_URL = BASE_URL + "fetch_cards.php"; // URL to fetch cards
     private static final String USER_PREFS = "UserDetails";
     private static final String USER_ID_KEY = "id";

@@ -27,8 +27,8 @@
             <!-- Profile Picture Section -->
             <ImageView
                 android:id="@+id/imgProfilePic"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="141dp"
+                android:layout_height="137dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="16dp"
@@ -63,7 +63,6 @@
                 android:id="@+id/txtPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:fontFamily="@font/helvetica"
                 android:text="0771234567"
                 android:textAlignment="center"
