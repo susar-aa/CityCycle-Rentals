@@ -67,7 +67,7 @@ public class UserReservationActivity extends AppCompatActivity {
 
 
     private void fetchReservations(int userId) {
-        String url = "http://192.168.1.2/getReservations.php?userId=" + userId;
+        String url = "http://192.168.1.2/CityCycle%20Rentals/getReservations.php?userId=" + userId;
 
         Log.d(TAG, "Fetching reservations from URL: " + url);
 

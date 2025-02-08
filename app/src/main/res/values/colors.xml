@@ -9,4 +9,9 @@
     <color name="input_hint_text">#8E8E93</color>
     <color name="green">#18A404</color>
     <color name="light_gray">#336B6B6B</color>
-</resources>
+    <color name="red">#FF0000</color>
+    <color name="primary_dark_blue">#1565C0</color>
+    <color name="secondary_dark_blue">#0288D1</color>
+    <color name="error_red">#D32F2F</color>
+    <color name="bottom_nav_color">#FF6200EE</color>
+    </resources>

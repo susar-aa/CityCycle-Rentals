@@ -19,11 +19,20 @@ public class AdminPanelActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admin_panel);
 
-        Button viewReservationsButton = findViewById(R.id.managereservationbutton);
-        viewReservationsButton.setOnClickListener(new View.OnClickListener() {
+        Button PendingReservationsButton = findViewById(R.id.pendingreservationbutton);
+        PendingReservationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminPanelActivity.this, ManageReservationsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button ManageUsersButton = findViewById(R.id.manageuserbutton);
+        ManageUsersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminPanelActivity.this, ManageUsersActivity.class);
                 startActivity(intent);
             }
         });

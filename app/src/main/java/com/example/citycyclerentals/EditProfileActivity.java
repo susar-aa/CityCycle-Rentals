@@ -97,7 +97,7 @@ public class EditProfileActivity extends AppCompatActivity {
     // Method to update profile data
     private void updateProfileData(final String userId, final String name, final String email, final String phone_number) {
         // Set up the URL for your PHP update script
-        String url = "http://192.168.1.2/update_profile.php";  // Update this with the correct URL
+        String url = "http://192.168.1.2/CityCycle%20Rentals/update_profile.php";  // Update this with the correct URL
 
         // Create a StringRequest to send data to the server
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

@@ -43,7 +43,7 @@
                 android:id="@+id/searchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:queryHint="Search bikes"
+                android:queryHint="Search by bike , location or type"
                 android:hint="Search"
                 android:text="Search"
                 app:iconifiedByDefault="false"

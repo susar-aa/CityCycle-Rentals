@@ -76,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser(final String username, final String email, final String phone, final String password) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.1.2/register.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.1.2/CityCycle%20Rentals/register.php",
                 new RegisterResponseListener(), new RegisterErrorListener()) {
             @Override
             protected Map<String, String> getParams() {

@@ -1,5 +1,7 @@
 package com.example.citycyclerentals;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -7,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,13 +21,18 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.citycyclerentals.models.ReservationAdmin;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class EditReservationDialogFragment extends DialogFragment {
 
-    private EditText etName, etStartDate, etEndDate, etTotalPrice, etContactNumber, etNIC, etDiscount;
+    private EditText etName, etContactNumber, etNIC, etStartDate, etEndDate, etTotalPrice, etDiscount;
     private Spinner spStatus, spPaymentMethod;
     private Button btnSave, btnCancel;
     private ReservationAdmin reservation;
     private OnSaveListener saveListener;
+    private Calendar calendar;
 
     public static EditReservationDialogFragment newInstance(ReservationAdmin reservation) {
         EditReservationDialogFragment fragment = new EditReservationDialogFragment();
@@ -48,6 +57,8 @@ public class EditReservationDialogFragment extends DialogFragment {
         spPaymentMethod = view.findViewById(R.id.spPaymentMethod);
         btnSave = view.findViewById(R.id.btnSave);
         btnCancel = view.findViewById(R.id.btnCancel);
+
+        calendar = Calendar.getInstance();
 
         if (getArguments() != null && getArguments().containsKey("reservation")) {
             reservation = (ReservationAdmin) getArguments().getSerializable("reservation");
@@ -74,10 +85,27 @@ public class EditReservationDialogFragment extends DialogFragment {
             }
         }
 
+        etStartDate.setOnClickListener(v -> showDateTimePicker(etStartDate));
+        etEndDate.setOnClickListener(v -> showDateTimePicker(etEndDate));
+
         btnSave.setOnClickListener(v -> saveReservation());
         btnCancel.setOnClickListener(v -> dismiss());
 
         return view;
+    }
+
+    private void showDateTimePicker(final EditText editText) {
+        final Calendar currentDate = Calendar.getInstance();
+        calendar = Calendar.getInstance();
+        new DatePickerDialog(getContext(), (view, year, monthOfYear, dayOfMonth) -> {
+            calendar.set(year, monthOfYear, dayOfMonth);
+            new TimePickerDialog(getContext(), (view1, hourOfDay, minute) -> {
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
+                SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+                editText.setText(dateTimeFormat.format(calendar.getTime()));
+            }, currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE), false).show();
+        }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     private void saveReservation() {

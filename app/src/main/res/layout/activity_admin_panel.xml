@@ -26,20 +26,54 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:id="@+id/managereservationbutton"
+        android:id="@+id/pendingreservationbutton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:background="@drawable/rounded_button"
-        android:text="Manage Reservations"
+        android:text="Pending Reservations"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.412"
+        app:layout_constraintVertical_bias="0.084"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/otherreservationbutton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_button"
+        android:text="Other Reservations"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pendingreservationbutton"
+        app:layout_constraintVertical_bias="0.04"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/manageuserbutton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_button"
+        android:text="Manage Users"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otherreservationbutton"
+        app:layout_constraintVertical_bias="0.04"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

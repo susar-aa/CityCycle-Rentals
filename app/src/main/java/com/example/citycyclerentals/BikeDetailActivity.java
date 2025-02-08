@@ -109,7 +109,7 @@ public class BikeDetailActivity extends AppCompatActivity {
         final List<ReservedTime> reservedTimes = new ArrayList<>();
 
         // Fetch data from the database (using a background thread or AsyncTask)
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.168.1.2/fetch_reserved_times.php?bike_id=" + bikeId,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.168.1.2/CityCycle%20Rentals/fetch_reserved_times.php?bike_id=" + bikeId,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
