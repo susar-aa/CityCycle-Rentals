@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
@@ -20,6 +21,8 @@ public class AddCardActivity extends AppCompatActivity {
 
     private EditText etCardNumber, etExpiryDate, etCardHolder, etCVV;
     private Button btnSaveCard;
+    private ImageButton btnBack;
+    private Button btnAddCard;
     private static final String TAG = "AddCardActivity";
     private static final String SAVE_CARD_URL = "http://192.168.1.2/CityCycle%20Rentals/save_card.php";  // Define the URL here
 
@@ -27,6 +30,9 @@ public class AddCardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card);
+
+        btnBack = findViewById(R.id.btnBack);
+        btnAddCard = findViewById(R.id.btnAddCard);
 
         etCardNumber = findViewById(R.id.etCardNumber);
         etExpiryDate = findViewById(R.id.etExpiryDate);
@@ -36,6 +42,9 @@ public class AddCardActivity extends AppCompatActivity {
 
         // Set the OnClickListener for the button
         btnSaveCard.setOnClickListener(v -> saveCard());
+
+        btnBack.setOnClickListener(v -> finish());
+        btnAddCard.setOnClickListener(v -> startActivity(new Intent(AddCardActivity.this, ManagePayment.class)));
     }
 
     private void saveCard() {

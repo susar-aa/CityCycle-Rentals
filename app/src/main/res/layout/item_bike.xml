@@ -1,109 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:background="@drawable/bike_card_background"
-    android:layout_marginBottom="8dp">
+    android:padding="16dp"
+    android:background="@drawable/rounded_background"
+    android:layout_marginBottom="16dp"
+    tools:context=".BikeDetailActivity">
 
     <ImageView
         android:id="@+id/bike_image"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:layout_alignParentTop="true" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/bike_placeholder" />
 
     <TextView
         android:id="@+id/bike_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bike_image"
         android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_marginTop="8dp" />
+        android:textSize="22sp"
+        android:fontFamily="@font/sf_pro_display_bold"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/bike_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"
+        android:text="Bike Name" />
 
     <TextView
         android:id="@+id/bike_type"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bike_name"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp" />
+        android:textSize="17sp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/bike_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="4dp"
+        android:text="Type" />
 
     <TextView
         android:id="@+id/bike_station_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bike_type"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp" />
+        android:textSize="17sp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/bike_type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="4dp"
+        android:text="Station Name" />
 
     <TextView
         android:id="@+id/bike_hourly_price"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bike_station_name"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp" />
+        android:textSize="17sp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/bike_station_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="4dp"
+        android:text="Hourly Price" />
 
     <TextView
         android:id="@+id/bike_daily_price"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bike_hourly_price"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp" />
+        android:textSize="17sp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/bike_hourly_price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="4dp"
+        android:text="Daily Price" />
 
     <TextView
         android:id="@+id/bike_monthly_price"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bike_daily_price"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp" />
+        android:textSize="17sp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/bike_daily_price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="4dp"
+        android:text="Monthly Price" />
 
     <TextView
         android:id="@+id/bike_status"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bike_monthly_price"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp"
-        android:textColor="@android:color/holo_green_dark" />
+        android:textSize="17sp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@android:color/holo_green_dark"
+        app:layout_constraintTop_toBottomOf="@id/bike_monthly_price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"
+        android:text="Status" />
 
-    <TextView
+    <Button
         android:id="@+id/edit_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/bike_status"
-        android:layout_alignParentStart="true"
+        android:layout_height="44dp"
         android:text="Edit"
-        android:textColor="@android:color/holo_blue_dark"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:clickable="true"
-        android:focusable="true" />
+        android:backgroundTint="@color/primary_blue"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/sf_pro_display_medium"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="4dp"
+        app:cornerRadius="12dp"
+        app:layout_constraintTop_toBottomOf="@id/bike_status"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <Button
         android:id="@+id/delete_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/bike_status"
-        android:layout_alignParentEnd="true"
+        android:layout_height="44dp"
         android:text="Delete"
-        android:textColor="@android:color/holo_red_dark"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:clickable="true"
-        android:focusable="true" />
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/sf_pro_display_medium"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="4dp"
+        app:cornerRadius="12dp"
+        app:layout_constraintTop_toBottomOf="@id/bike_status"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Spinner
         android:id="@+id/availability_spinner"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/delete_button"
-        android:layout_alignParentStart="true"
         android:entries="@array/availability_options"
-        android:layout_marginTop="8dp" />
-</RelativeLayout>
+        app:layout_constraintTop_toBottomOf="@id/delete_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        app:spinnerStyle="?android:attr/spinnerStyle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

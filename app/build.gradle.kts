@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -47,6 +48,9 @@ android {
             )
         }
     }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
 
     configurations.all {
         resolutionStrategy {
@@ -63,6 +67,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.firebase.inappmessaging)
     implementation(libs.navigation.runtime)
+    implementation(libs.play.services.maps)
+    implementation(libs.core.ktx)
 
     // Testing dependencies
     testImplementation(libs.junit)
@@ -107,4 +113,9 @@ dependencies {
     implementation ("com.github.dhaval2404:imagepicker:2.1.")
     implementation ("com.squareup.okhttp3:okhttp:4.9.1")
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
+    implementation ("com.google.android.gms:play-services-maps:17.0.0")
+    implementation ("com.android.volley:volley:1.2.0")
+    implementation ("com.airbnb.android:lottie:4.2.0")
+    implementation ("androidx.gridlayout:gridlayout:1.0.0")
+
 }

@@ -42,9 +42,6 @@ public class UserProfileActivity extends AppCompatActivity {
         // Retrieve the logged-in user's data from SharedPreferences
         loadUserProfileData();
 
-        // Show available cards for the logged-in user
-        displayUserCards(userId);
-
         setupBottomNavigation();
 
         // Button to manage profile (Edit profile)
@@ -80,7 +77,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 editor.apply();
 
                 Intent intent = new Intent(UserProfileActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clears backstack
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }
@@ -109,15 +106,6 @@ public class UserProfileActivity extends AppCompatActivity {
             Picasso.get().load(profilePicUrl).into(imgProfilePic);
         } else {
             imgProfilePic.setImageResource(R.drawable.profile_placeholder_image); // Default placeholder image
-        }
-    }
-
-    // Method to display available cards for the logged-in user based on the userId
-    private void displayUserCards(String userId) {
-        if (userId != null && !userId.isEmpty()) {
-            // Your logic to display user-specific cards
-        } else {
-            Toast.makeText(this, "No cards available for the logged-in user.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -178,5 +166,8 @@ public class UserProfileActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        // Highlight the profile item as selected
+        bottomNavigationView.setSelectedItemId(R.id.nav_profile);
     }
 }

@@ -59,7 +59,7 @@ public class ReservationAdapter extends BaseAdapter {
         endDateTextView.setText(reservation.getEndDate());
 
         TextView totalPriceTextView = convertView.findViewById(R.id.totalPriceTextView);
-        totalPriceTextView.setText(String.format("$%.2f", reservation.getTotalPrice()));
+        totalPriceTextView.setText(String.format("Rs: %.2f", reservation.getTotalPrice()));
 
         TextView statusTextView = convertView.findViewById(R.id.statusTextView);
         statusTextView.setText(reservation.getStatus());

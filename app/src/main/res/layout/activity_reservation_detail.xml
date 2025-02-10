@@ -1,102 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
-    android:background="#f7f7f7">
+    android:padding="16dp"
+    android:background="#f7f7f7"
+    android:layout_gravity="center"
+    tools:context=".ReservationDetailActivity">
 
-    <!-- Title -->
-    <TextView
-        android:id="@+id/reservationDetailsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reservation Details"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#276fc3"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"/>
-
-    <!-- Reservation ID -->
-    <TextView
-        android:id="@+id/reservationDetailsText"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reservation ID: Example ID"
-        android:textSize="18sp"
-        android:textColor="#333333"
-        android:layout_marginBottom="8dp" />
+        android:layout_margin="16dp"
+        android:background="@android:color/white"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!-- Bike Name -->
-    <TextView
-        android:id="@+id/bikeName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bike Name: Example Bike"
-        android:textSize="18sp"
-        android:textColor="#333333"
-        android:layout_marginBottom="8dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-    <!-- Start Date -->
-    <TextView
-        android:id="@+id/startDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start Date: 2025-02-01"
-        android:textSize="16sp"
-        android:textColor="#777777"
-        android:layout_marginBottom="8dp" />
+            <!-- Title -->
+            <TextView
+                android:id="@+id/reservationDetailsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/sf_pro_display_bold"
+                android:text="Reservation Details"
+                android:textColor="#276fc3"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    <!-- End Date -->
-    <TextView
-        android:id="@+id/endDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="End Date: 2025-02-05"
-        android:textSize="16sp"
-        android:textColor="#777777"
-        android:layout_marginBottom="8dp" />
+            <!-- Reservation ID -->
+            <TextView
+                android:id="@+id/reservationDetailsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:text="Reservation ID: Example ID"
+                android:textColor="#333333"
+                android:textSize="18sp" />
 
-    <!-- Total Price -->
-    <TextView
-        android:id="@+id/totalPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Total Price: $50.00"
-        android:textSize="16sp"
-        android:textColor="#333333"
-        android:layout_marginBottom="8dp" />
+            <!-- Bike Name -->
+            <TextView
+                android:id="@+id/bikeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:text="Bike Name: Example Bike"
+                android:textColor="#333333"
+                android:textSize="18sp" />
 
-    <!-- Status -->
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Status: Confirmed"
-        android:textSize="16sp"
-        android:textColor="#4caf50"
-        android:layout_marginBottom="20dp" />
+            <!-- Start Date -->
+            <TextView
+                android:id="@+id/startDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:text="Start Date: 2025-02-01"
+                android:textColor="#777777"
+                android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/cancelButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cancel Reservation"
-        android:backgroundTint="#FF0000"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="16dp"/>
+            <!-- End Date -->
+            <TextView
+                android:id="@+id/endDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:text="End Date: 2025-02-05"
+                android:textColor="#777777"
+                android:textSize="16sp" />
 
-    <!-- Button to return to the previous screen -->
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/rounded_button"
-        android:text="Back"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        android:onClick="onBackPressed"
-        android:layout_marginBottom="16dp" />
+            <!-- Total Price -->
+            <TextView
+                android:id="@+id/totalPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:text="Total Price: $50.00"
+                android:textColor="#333333"
+                android:textSize="16sp" />
 
-</LinearLayout>
+            <!-- Status -->
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:text="Status: Confirmed"
+                android:textColor="#4caf50"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#FF0000"
+                android:elevation="4dp"
+                android:fontFamily="@font/sf_pro_display_medium"
+                android:text="Cancel Reservation"
+                android:textColor="#FFFFFF"
+                app:cornerRadius="12dp" />
+
+            <!-- Button to return to the previous screen -->
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#276fc3"
+                android:elevation="4dp"
+                android:fontFamily="@font/sf_pro_display_medium"
+                android:onClick="onBackPressed"
+                android:text="Back"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                app:cornerRadius="12dp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

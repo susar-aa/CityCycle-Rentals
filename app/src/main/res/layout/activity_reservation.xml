@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:padding="20dp"
     android:background="@color/white"
     tools:context=".ReservationActivity">
@@ -20,50 +21,66 @@
             android:text="Reservation"
             android:textStyle="bold"
             android:layout_marginBottom="20dp"
-            android:fontFamily="@font/avenir_black"
+            android:fontFamily="@font/sf_pro_display_bold"
             android:textAlignment="center"
             android:textColor="@color/primary_blue"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Full Name Field -->
         <EditText
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:background="@drawable/rounded_inputfield"
             android:hint="Full Name"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/title_reservation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Contact Number Label -->
-
-        <!-- Contact Number -->
+        <!-- Contact Number Field -->
         <EditText
             android:id="@+id/contact_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:background="@drawable/rounded_inputfield"
             android:hint="Contact Number"
             android:inputType="phone"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="129dp" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- NIC Field -->
         <EditText
             android:id="@+id/nic"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:background="@drawable/rounded_inputfield"
             android:hint="NIC"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/contact_number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -71,13 +88,19 @@
         <!-- Start Date and Time Picker -->
         <EditText
             android:id="@+id/start_datetime"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:background="@drawable/rounded_inputfield"
             android:hint="Booking Date / Time"
             android:focusable="false"
             android:clickable="true"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/nic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -85,13 +108,19 @@
         <!-- End Date and Time Picker -->
         <EditText
             android:id="@+id/end_datetime"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:background="@drawable/rounded_inputfield"
             android:hint="Returning Date / Time"
             android:focusable="false"
             android:clickable="true"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/start_datetime"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -104,6 +133,7 @@
             android:text="Select Payment Method"
             android:textAlignment="textStart"
             android:textSize="16sp"
+            android:fontFamily="@font/sf_pro_display_regular"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/end_datetime"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,14 +143,22 @@
         <!-- Payment Method Spinner -->
         <Spinner
             android:id="@+id/payment_method"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            style="@style/iOSSpinner"
-            android:hint="Select Payment Method"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="@drawable/rounded_spinner"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:textSize="16sp"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/payment_method_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Select Card Label -->
         <TextView
             android:id="@+id/selectCardLabel"
             android:layout_width="match_parent"
@@ -129,6 +167,7 @@
             android:textAlignment="textStart"
             android:visibility="gone"
             android:textSize="16sp"
+            android:fontFamily="@font/sf_pro_display_regular"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/payment_method"
             app:layout_constraintStart_toStartOf="parent"
@@ -138,10 +177,18 @@
         <!-- Card Selection Spinner -->
         <Spinner
             android:id="@+id/card_selection_spinner"
-            style="@style/iOSSpinner"
-            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="@drawable/rounded_spinner"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:textSize="16sp"
             android:textColor="@color/black"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/selectCardLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -149,11 +196,17 @@
         <!-- Promo Code Field -->
         <EditText
             android:id="@+id/promo_code"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:background="@drawable/rounded_inputfield"
             android:hint="Promo Code"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/card_selection_spinner"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -161,14 +214,18 @@
         <!-- Reserve Button -->
         <Button
             android:id="@+id/reserve_button"
-            style="@style/iOSButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
             android:text="Confirm Reservation"
+            android:backgroundTint="@color/primary_blue"
+            android:textColor="#FFFFFF"
             android:layout_marginTop="15dp"
+            android:elevation="4dp"
+            app:cornerRadius="12dp"
+            android:fontFamily="@font/sf_pro_display_medium"
             app:layout_constraintTop_toBottomOf="@id/promo_code"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

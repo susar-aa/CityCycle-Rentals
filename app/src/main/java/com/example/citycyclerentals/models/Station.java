@@ -1,6 +1,8 @@
 package com.example.citycyclerentals.models;
 
-public class Station {
+import java.io.Serializable;
+
+public class Station implements Serializable {
     private int id;
     private String name;
     private double latitude;

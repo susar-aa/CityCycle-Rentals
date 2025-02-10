@@ -47,9 +47,9 @@ public class BikeAdapter extends RecyclerView.Adapter<BikeAdapter.BikeViewHolder
 
         // Bind the bike data to the views
         holder.bikeName.setText(bike.getName());
-        holder.bikePrice.setText(String.format("Hourly Price: %.2f LKR", bike.getPriceHourly()));
-        holder.bikeType.setText(bike.getType());
-        holder.stationName.setText("Station: " + bike.getStationName());
+        holder.bikePrice.setText(String.format("%.2f LKR", bike.getPriceHourly()));
+        holder.bikeType.setText("Type: " + bike.getType());
+        holder.stationName.setText("Location: " + bike.getStationName());
 
         // Load bike image using Glide
         Glide.with(context)

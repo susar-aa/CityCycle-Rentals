@@ -10,4 +10,8 @@
     <item name="hourlyPriceCard" type="id" />
     <item name="dailyPriceCard" type="id" />
     <item name="monthlyPriceCard" type="id" />
+    <item name="reservationsHeader" type="id" />
+    <item name="usersHeader" type="id" />
+    <item name="dataHeader" type="id" />
+    <item name="creatortext" type="id" />
 </resources>
