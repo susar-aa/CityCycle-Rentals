@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
     android:padding="16dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    android:background="@drawable/rounded_background">
 
     <!-- Linear layout to hold bike item details -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,45 +22,69 @@
             android:id="@+id/bikeImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:scaleType="fitCenter"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/round_corner" />
 
         <!-- Bike name -->
+
+        <!-- Hourly price -->
+
+        <!-- Bike type -->
+
         <TextView
             android:id="@+id/bikeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/sf_pro_display_bold"
             android:text="Bike Name"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginBottom="4dp" />
+            app:layout_constraintTop_toBottomOf="@id/bikeImage"
+            tools:layout_editor_absoluteX="-1dp" />
 
-        <!-- Hourly price -->
         <TextView
             android:id="@+id/price_hourly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hourly Price: 100 LKR"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/sf_pro_display_bold"
+            android:text="100 LKR"
+            app:layout_constraintTop_toBottomOf="@id/bikeImage"
+            android:textColor="@color/primary_blue"
             android:textSize="16sp"
-            android:layout_marginBottom="4dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/bikeName"
+            tools:layout_editor_absoluteY="208dp" />
 
-        <!-- Bike type -->
         <TextView
             android:id="@+id/bikeType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bike Type"
-        android:textSize="16sp"
-        android:layout_marginBottom="4dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/price_hourly"
+            android:text="Bike Type"
+            android:layout_margin="5dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/darker_gray"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:layout_marginBottom="4dp" />
 
         <!-- Station name -->
         <TextView
             android:id="@+id/stationName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            app:layout_constraintTop_toBottomOf="@id/bikeType"
             android:text="Station Name"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textColor="@android:color/darker_gray"
+            android:fontFamily="@font/sf_pro_display_regular" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

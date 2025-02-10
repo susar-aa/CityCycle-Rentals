@@ -14,62 +14,108 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".admin.EditPromotionActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".admin.AddPromotionActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".admin.ManagePromotionsActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDvkoOq4cv0_JsaBd41wWRgHVR2jV79RzY" />
+
+        <activity
+            android:name=".admin.ViewLocationActivity"
+            android:exported="false" />
+
+        <activity android:name=".SelectLocationActivity" />
+
+        <activity android:name=".admin.AddStationActivity" />
+
+        <activity android:name=".admin.EditStationActivity" />
+
+        <activity android:name=".admin.ManageStationsActivity" />
+
+        <activity android:name=".admin.ManageBikesActivity" />
+
         <activity
             android:name=".admin.EditBikeActivity"
             android:exported="false" />
+
         <activity
             android:name=".admin.AddBikeActivity"
             android:exported="false" />
-        <activity android:name=".admin.OtherBikesActivity"
+
+        <activity android:name=".LoginActivity"
             android:exported="false" />
-        <activity
-            android:name=".admin.ManageBikesActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ForgotPasswordActivity"
             android:exported="false" />
+
         <activity
             android:name=".admin.ManageUsersActivity"
             android:exported="false" />
+
         <activity
             android:name=".admin.PaidReservationsActivity"
             android:exported="false" />
+
         <activity
             android:name=".admin.OtherReservationsActivity"
             android:exported="false" />
+
         <activity
             android:name=".admin.ConfirmedReservationActivity"
             android:exported="false" />
+
         <activity
             android:name=".admin.EndedReservationsActivity"
             android:exported="false" />
-        <activity
-            android:name=".admin.ManageBikeActivity"
-            android:exported="false" />
+
         <activity
             android:name=".admin.CanceledReservationsActivity"
             android:exported="false" />
+
         <activity
             android:name=".admin.ManageAdminsActivity"
             android:exported="false" />
+
         <activity
             android:name=".EditReservationDialogFragment"
             android:exported="false" />
+
         <activity
             android:name=".ManageReservationsActivity"
             android:exported="false" />
+
         <activity
             android:name=".ReservationDetailActivity"
             android:exported="false" />
+
         <activity
             android:name=".UserReservationActivity"
             android:exported="false" />
+
         <activity
             android:name=".DashboardActivity"
             android:exported="false" />
+
         <activity
             android:name=".ReservationActivity"
             android:exported="false" />
+
         <activity
             android:name=".BikeDetailActivity"
             android:exported="false" />
@@ -91,12 +137,9 @@
         <activity
             android:name=".admin.AdminPanelActivity"
             android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
         <activity android:name=".UserProfileActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

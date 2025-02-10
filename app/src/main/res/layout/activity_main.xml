@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/goToLoginButton"
+    <!-- Welcome Text -->
+    <TextView
+        android:id="@+id/welcomeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:text="Welcome to CityCycleRentals"
+        android:textSize="32sp"
+        android:textColor="@color/primary_blue"
+        android:textStyle="bold" />
+
+    <!-- Navigate Button -->
+    <Button
+        android:id="@+id/navigateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcomeTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/primary_blue"
         android:text="Go to Login"
-        android:padding="12dp"
-        android:backgroundTint="#276fc3"
-        android:textColor="#ffffff"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:drawableStart="@drawable/icons8_login_24"
-    android:drawablePadding="8dp" />
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

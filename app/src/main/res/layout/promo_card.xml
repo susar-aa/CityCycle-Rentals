@@ -1,65 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="16dp"
     android:layout_margin="10dp"
-    android:layout_gravity="center"
-    app:cardCornerRadius="20dp"
-    android:elevation="4dp">
+    app:cardElevation="8dp"
+    android:background="@drawable/rounded_background"
+    android:layout_marginBottom="16dp">
 
     <ImageView
         android:id="@+id/promoIcon"
         android:layout_width="76dp"
         android:layout_height="70dp"
         android:layout_gravity="end"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="16dp"
         android:contentDescription="Promo Icon"
-        android:src="@drawable/discount_icon" />
+        android:src="@drawable/discount_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/promoCode"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/sf_pro_display_bold"
+        android:text="Promo Code"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/promoIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/promoCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Promo Code"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="8dp" />
+    <TextView
+        android:id="@+id/discountPercentage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Discount"
+        android:textSize="17sp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/promoCode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/promoIcon"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp" />
 
-        <TextView
-            android:id="@+id/discountPercentage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Discount"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="14sp" />
+    <TextView
+        android:id="@+id/startdate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Starting Date"
+        android:textSize="17sp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/discountPercentage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/promoIcon"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp" />
 
-        <TextView
-            android:id="@+id/startdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Starting Dates"
-            android:layout_marginBottom="8dp"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+    <TextView
+        android:id="@+id/validdate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Ending Date"
+        android:textSize="17sp"
+        android:fontFamily="@font/sf_pro_display_regular"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/startdate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/promoIcon"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp" />
 
-        <TextView
-            android:id="@+id/validdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ending Dates"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
-
-
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
-    app:cardElevation="8dp">
+    app:cardElevation="8dp"
+    android:background="@drawable/rounded_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,9 +18,10 @@
         <!-- Bike Image -->
         <ImageView
             android:id="@+id/bikeImageView"
-            android:layout_width="99dp"
-            android:layout_height="88dp"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:layout_marginEnd="12dp"
+            android:contentDescription="@string/bike_image"
             android:scaleType="centerCrop"
             android:src="@drawable/error_placeholder_image" />
 
@@ -35,7 +37,8 @@
                 android:layout_height="wrap_content"
                 android:text="Bike Name"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="22sp"
+                android:fontFamily="@font/sf_pro_display_bold"
                 android:textStyle="bold" />
 
             <TextView
@@ -43,32 +46,53 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Reservation Name"
-                android:textSize="16sp"/>
-
+                android:textSize="17sp"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="4dp"/>
 
             <!-- Start Date -->
+            <TextView
+                android:id="@+id/startDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Date: 01/02/2025"
+                android:textSize="14sp"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginTop="4dp"/>
 
             <!-- End Date -->
+            <TextView
+                android:id="@+id/endDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Date: 05/02/2025"
+                android:textSize="14sp"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginTop="4dp"/>
 
             <!-- Total Price -->
             <TextView
                 android:id="@+id/totalPriceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Price"
+                android:text="Total Price: $150"
                 android:textSize="14sp"
+                android:fontFamily="@font/sf_pro_display_regular"
                 android:textColor="@android:color/darker_gray"
-                android:layout_marginTop="2dp"/>
+                android:layout_marginTop="4dp"/>
 
             <!-- Reservation Status -->
             <TextView
                 android:id="@+id/statusTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Status"
+                android:text="Status: Confirmed"
                 android:textSize="14sp"
-                android:textColor="@color/green"
-                android:textStyle="bold"
+                android:fontFamily="@font/sf_pro_display_bold"
+                android:textColor="@android:color/holo_green_dark"
                 android:layout_marginTop="6dp"/>
         </LinearLayout>
 

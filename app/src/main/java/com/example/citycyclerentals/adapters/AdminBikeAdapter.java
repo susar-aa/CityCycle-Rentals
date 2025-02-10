@@ -46,7 +46,7 @@ public class AdminBikeAdapter extends RecyclerView.Adapter<AdminBikeAdapter.Bike
         Bike bike = bikeList.get(position);
         holder.nameTextView.setText(bike.getName());
         holder.typeTextView.setText("Type: " + bike.getType());
-        holder.stationNameTextView.setText("Station: " + bike.getStationName());
+        holder.stationNameTextView.setText("Location: " + bike.getStationName());
         holder.hourlyPriceTextView.setText("Hourly Price: Rs:" + bike.getPriceHourly());
         holder.dailyPriceTextView.setText("Daily Price: Rs:" + bike.getPriceDaily());
         holder.monthlyPriceTextView.setText("Monthly Price: Rs:" + bike.getPriceMonthly());

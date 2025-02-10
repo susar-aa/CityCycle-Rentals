@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.citycyclerentals.R;
 import com.example.citycyclerentals.adapters.UserAdapter;
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.squareup.picasso.Picasso;
 
 import com.example.citycyclerentals.admin.User;
 
@@ -57,6 +58,7 @@ public class ManageUsersActivity extends AppCompatActivity implements UserAdapte
     private Button addUserButton;
     private static final int IMAGE_PICKER_REQUEST_CODE = 100;
     private String profileImageUrl;
+    private ImageView profileImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +139,6 @@ public class ManageUsersActivity extends AppCompatActivity implements UserAdapte
         final EditText phoneNumberEditText = view.findViewById(R.id.phone_number_edit_text);
         final EditText passwordEditText = view.findViewById(R.id.password_edit_text);
 
-        builder.setTitle("Add User");
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -199,7 +200,7 @@ public class ManageUsersActivity extends AppCompatActivity implements UserAdapte
         final EditText usernameEditText = view.findViewById(R.id.username_edit_text);
         final EditText emailEditText = view.findViewById(R.id.email_edit_text);
         final EditText phoneNumberEditText = view.findViewById(R.id.phone_number_edit_text);
-        final ImageView profileImageView = view.findViewById(R.id.profile_image_view);
+        profileImageView = view.findViewById(R.id.profile_image_view);
         final Button uploadImageButton = view.findViewById(R.id.upload_image_button);
 
         final User user = userList.get(position);
@@ -207,9 +208,13 @@ public class ManageUsersActivity extends AppCompatActivity implements UserAdapte
         usernameEditText.setText(user.getUsername());
         emailEditText.setText(user.getEmail());
         phoneNumberEditText.setText(user.getPhoneNumber());
+
         // Load the profile picture
-        // You can use a library like Picasso or Glide to load the image into the ImageView
-        // Picasso.get().load(user.getProfilePicture()).into(profileImageView);
+        if (!user.getProfilePicture().isEmpty()) {
+            Picasso.get().load(user.getProfilePicture()).placeholder(R.drawable.profile_placeholder_image).into(profileImageView);
+        } else {
+            profileImageView.setImageResource(R.drawable.profile_placeholder_image);
+        }
 
         uploadImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -222,7 +227,6 @@ public class ManageUsersActivity extends AppCompatActivity implements UserAdapte
             }
         });
 
-        builder.setTitle("Edit User");
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -365,7 +369,7 @@ public class ManageUsersActivity extends AppCompatActivity implements UserAdapte
 
         if (resultCode == RESULT_OK && requestCode == IMAGE_PICKER_REQUEST_CODE) {
             Uri fileUri = data.getData();
-            // profileImageView.setImageURI(fileUri);
+            profileImageView.setImageURI(fileUri);
 
             // Upload image
             uploadImage(fileUri);

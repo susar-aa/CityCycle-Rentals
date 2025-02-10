@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        goToLoginButton = findViewById(R.id.goToLoginButton);
+        goToLoginButton = findViewById(R.id.navigateButton);
 
         goToLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override

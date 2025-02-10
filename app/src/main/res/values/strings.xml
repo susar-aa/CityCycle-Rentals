@@ -11,6 +11,7 @@
         <item>Amex</item>
     </string-array>
     <string name="app_name">CityCycle Rentals</string>
+    <string name="bike_image">Bicycle Image</string>
 
     <string-array name="status_array">
         <item>pending</item>

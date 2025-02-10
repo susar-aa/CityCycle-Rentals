@@ -2,7 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:fontFamily="@font/sf_pro_display_bold"
+        android:gravity="center"
+        android:text="Manage Reservations"
+        android:textColor="@color/primary_blue"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Back"
+        android:src="@drawable/back_icon"
+        app:tint="@color/black" />
 
     <SearchView
         android:id="@+id/searchView"
@@ -10,6 +31,7 @@
         android:layout_height="wrap_content"
         android:queryHint="Search by name, NIC, or contact number"
         android:iconifiedByDefault="false"
+        android:layout_marginTop="55dp"
         android:background="@drawable/search_bar"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="16dp" />
@@ -22,6 +44,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:divider="@android:color/transparent"
+        android:background="@drawable/rounded_background"
         android:dividerHeight="16dp" />
 
     <ScrollView

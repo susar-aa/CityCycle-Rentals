@@ -5,21 +5,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@android:color/white"
-    android:padding="16dp">
+    android:background="@android:color/white">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="4dp">
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
@@ -32,7 +32,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/icons8_circle_50"
+                android:background="@drawable/rounded_image_background"
                 android:scaleType="centerCrop"
                 android:src="@drawable/profile_placeholder_image" />
 
@@ -42,78 +42,77 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/helvetica_bold"
+                android:fontFamily="@font/sf_pro_display_bold"
                 android:text="Susara Senarathne"
                 android:textAlignment="center"
-                android:textColor="#276fc3"
-                android:textSize="16sp" />
+                android:textColor="@color/black"
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/helvetica"
+                android:fontFamily="@font/sf_pro_display_regular"
                 android:text="suz.x2006@gmail.com"
                 android:textAlignment="center"
-                android:textColor="#276fc3"
-                android:textSize="16sp" />
+                android:textColor="@color/black"
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/txtPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/helvetica"
+                android:fontFamily="@font/sf_pro_display_regular"
                 android:text="0771234567"
                 android:textAlignment="center"
-                android:textColor="#276fc3"
-                android:textSize="16sp" />
+                android:textColor="@color/black"
+                android:textSize="17sp" />
 
             <!-- Buttons inside the card -->
             <Button
                 android:id="@+id/btnLogout"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/rounded_button_logout"
                 android:text="Logout"
                 android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                android:textSize="17sp"
+                android:fontFamily="@font/sf_pro_display_medium" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:orientation="horizontal">
 
                 <!-- Manage Profile Button inside the Card -->
                 <Button
                     android:id="@+id/btnManageProfile"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_button"
                     android:text="Manage Profile"
                     android:textColor="@android:color/white"
-                    android:textSize="13sp" />
+                    android:textSize="17sp"
+                    android:fontFamily="@font/sf_pro_display_medium" />
 
                 <!-- Manage Payment Button inside the Card -->
                 <Button
                     android:id="@+id/btnManagePayment"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_button"
                     android:text="Manage Payment"
                     android:textColor="@android:color/white"
-                    android:textSize="13sp" />
+                    android:textSize="17sp"
+                    android:fontFamily="@font/sf_pro_display_medium" />
 
             </LinearLayout>
 
@@ -122,19 +121,17 @@
 
     <!-- Push logout button to the bottom -->
     <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_width="344dp"
+        android:layout_height="1010dp"
+        android:layout_weight="1" />
 
     <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
+        android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="3dp"
+        android:layout_margin="5dp"
         android:background="@drawable/bottom_nav_bg"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"

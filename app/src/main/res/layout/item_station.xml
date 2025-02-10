@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/station_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Station Name"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/station_coordinates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/station_name"
+        android:layout_marginTop="4dp"
+        android:text="Lat: 0.0, Lng: 0.0"
+        android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icons8_edit_50__1_"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Edit Station" />
+
+    <ImageButton
+        android:id="@+id/delete_button"
+        android:layout_width="44dp"
+        android:layout_height="50dp"
+        android:layout_toStartOf="@id/edit_button"
+        android:layout_toLeftOf="@id/edit_button"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Delete Station"
+        android:src="@drawable/icons8_delete_24" />
+</RelativeLayout>
