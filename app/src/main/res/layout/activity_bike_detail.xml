@@ -78,7 +78,6 @@
                 android:text="Available" />
         </LinearLayout>
 
-
         <!-- Button to rent the bike -->
         <Button
             android:id="@+id/rentButton"
@@ -90,8 +89,6 @@
             android:background="@drawable/rounded_button"
             android:layout_marginBottom="20dp"
             android:textSize="18sp" />
-
-
 
         <!-- Pricing Details Section -->
         <GridLayout
@@ -232,6 +229,56 @@
             android:background="@drawable/rounded_button"
             android:layout_marginBottom="20dp"
             android:textSize="18sp" />
+
+        <!-- Feedback Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@drawable/rounded_background"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/feedbackTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/primary_blue"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:fontFamily="@font/sf_pro_display_medium"
+                android:paddingBottom="8dp"
+                android:text="Feedback" />
+
+            <!-- Feedback Form -->
+            <EditText
+                android:id="@+id/feedbackInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Write your feedback here"
+                android:inputType="textMultiLine"
+                android:background="@drawable/rounded_inputfield"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/addFeedbackButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Feedback"
+                android:background="@drawable/rounded_button"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Feedback List -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/feedbackRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
 
     </LinearLayout>
 

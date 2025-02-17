@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,20 +16,25 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.citycyclerentals.adapters.FeedbackAdapter;
 import com.example.citycyclerentals.adapters.ReservedTimesAdapter;
+import com.example.citycyclerentals.models.Feedback;
 import com.example.citycyclerentals.models.ReservedTime;
 import com.example.citycyclerentals.admin.ViewLocationActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BikeDetailActivity extends AppCompatActivity {
 
     private ImageView bikeImage;
     private TextView bikeName, bikeType, stationName, priceHourly, priceDaily, priceMonthly, statusText, priceHourlyAmount, priceDailyAmount, priceMonthlyAmount;
-    private Button rentButton, viewLocationButton;  // Declare Rent and View Location buttons
+    private Button rentButton, viewLocationButton, addFeedbackButton;
+    private EditText feedbackInput;
     private static final String TAG = "BikeDetailActivity";
 
     @Override
@@ -45,15 +51,17 @@ public class BikeDetailActivity extends AppCompatActivity {
         priceDaily = findViewById(R.id.priceDaily);
         priceMonthly = findViewById(R.id.priceMonthly);
         statusText = findViewById(R.id.statusText);
-        rentButton = findViewById(R.id.rentButton);  // Initialize Rent button
+        rentButton = findViewById(R.id.rentButton);
         viewLocationButton = findViewById(R.id.locationButton);
         priceHourlyAmount = findViewById(R.id.priceHourlyAmount);
         priceDailyAmount = findViewById(R.id.priceDailyAmount);
         priceMonthlyAmount = findViewById(R.id.priceMonthlyAmount);
+        feedbackInput = findViewById(R.id.feedbackInput);
+        addFeedbackButton = findViewById(R.id.addFeedbackButton);
 
         // Retrieve the bike ID from the Intent
         Intent intent = getIntent();
-        final int bikeId = intent.getIntExtra("bike_id", -1);  // Retrieve bike ID
+        final int bikeId = intent.getIntExtra("bike_id", -1);
 
         // Fetch bike details from the server
         fetchBikeDetails(bikeId);
@@ -62,8 +70,16 @@ public class BikeDetailActivity extends AppCompatActivity {
         rentButton.setOnClickListener(v -> {
             // Handle Rent button click, navigate to the rental process
             Intent rentIntent = new Intent(BikeDetailActivity.this, ReservationActivity.class);
-            rentIntent.putExtra("bike_id", bikeId); // Pass the bike_id dynamically
+            rentIntent.putExtra("bike_id", bikeId);
             startActivity(rentIntent);
+        });
+
+        // Add Feedback button click handler
+        addFeedbackButton.setOnClickListener(v -> {
+            String feedbackText = feedbackInput.getText().toString();
+            if (!feedbackText.isEmpty()) {
+                addFeedback(bikeId, feedbackText);
+            }
         });
     }
 
@@ -114,6 +130,9 @@ public class BikeDetailActivity extends AppCompatActivity {
                         // Load reserved times for the bike
                         loadReservedTimes(bikeId);
 
+                        // Load feedbacks for the bike
+                        loadFeedbacks(bikeId);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Log.e(TAG, "JSON parsing error: " + e.getMessage());
@@ -129,10 +148,8 @@ public class BikeDetailActivity extends AppCompatActivity {
     }
 
     private void loadReservedTimes(final int bikeId) {
-        // Create a list to hold the reserved times
         final List<ReservedTime> reservedTimes = new ArrayList<>();
 
-        // Fetch data from the database (using a background thread or AsyncTask)
         StringRequest stringRequest = new StringRequest(
                 Request.Method.GET,
                 "http://192.168.1.2/CityCycle%20Rentals/fetch_reserved_times.php?bike_id=" + bikeId,
@@ -144,11 +161,9 @@ public class BikeDetailActivity extends AppCompatActivity {
                             String startDate = reservation.getString("start_date");
                             String endDate = reservation.getString("end_date");
 
-                            // Add the reserved time to the list
                             reservedTimes.add(new ReservedTime(startDate, endDate));
                         }
 
-                        // Set up the RecyclerView adapter with the data
                         ReservedTimesAdapter adapter = new ReservedTimesAdapter(reservedTimes);
                         RecyclerView recyclerView = findViewById(R.id.reservedTimesRecyclerView);
                         recyclerView.setLayoutManager(new LinearLayoutManager(BikeDetailActivity.this));
@@ -164,7 +179,66 @@ public class BikeDetailActivity extends AppCompatActivity {
                     Log.e(TAG, "Volley error: " + error.getMessage());
                 });
 
-        // Add the request to the queue
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void loadFeedbacks(final int bikeId) {
+        final List<Feedback> feedbacks = new ArrayList<>();
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET,
+                "http://192.168.1.2/CityCycle%20Rentals/fetch_feedbacks.php?bike_id=" + bikeId,
+                response -> {
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject feedbackObject = jsonArray.getJSONObject(i);
+                            String user = feedbackObject.getString("user");
+                            String feedbackText = feedbackObject.getString("feedback");
+
+                            feedbacks.add(new Feedback(user, feedbackText));
+                        }
+
+                        FeedbackAdapter adapter = new FeedbackAdapter(feedbacks);
+                        RecyclerView recyclerView = findViewById(R.id.feedbackRecyclerView);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(BikeDetailActivity.this));
+                        recyclerView.setAdapter(adapter);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Log.e(TAG, "JSON parsing error: " + e.getMessage());
+                    }
+                },
+                error -> {
+                    error.printStackTrace();
+                    Log.e(TAG, "Volley error: " + error.getMessage());
+                });
+
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void addFeedback(final int bikeId, final String feedbackText) {
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                "http://192.168.1.2/CityCycle%20Rentals/add_feedback.php",
+                response -> {
+                    Log.d(TAG, "Feedback added: " + response);
+                    feedbackInput.setText("");
+                    loadFeedbacks(bikeId);
+                },
+                error -> {
+                    error.printStackTrace();
+                    Log.e(TAG, "Volley error: " + error.getMessage());
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("bike_id", String.valueOf(bikeId));
+                params.put("feedback", feedbackText);
+                return params;
+            }
+        };
+
         Volley.newRequestQueue(this).add(stringRequest);
     }
 }

@@ -14,4 +14,8 @@
     <item name="usersHeader" type="id" />
     <item name="dataHeader" type="id" />
     <item name="creatortext" type="id" />
+    <item name="feedbackTitle" type="id" />
+    <item name="feedbackInput" type="id" />
+    <item name="addFeedbackButton" type="id" />
+    <item name="feedbackRecyclerView" type="id" />
 </resources>
