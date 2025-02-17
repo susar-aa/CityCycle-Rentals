@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/bike_image"
+        android:layout_width="wrap_content"
+        android:layout_height="337dp"
+        android:src="@drawable/bike_placeholder" />
+
+    <TextView
+        android:id="@+id/bike_name"
+        android:text="Bike Name"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:fontFamily="@font/sf_pro_display_bold"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/countdown"
+        android:fontFamily="@font/sf_pro_display_medium"
+        android:text="Countdown"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/status"
+        android:fontFamily="@font/sf_pro_display_medium"
+        android:textColor="@color/green"
+        android:text="Status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
+</LinearLayout>

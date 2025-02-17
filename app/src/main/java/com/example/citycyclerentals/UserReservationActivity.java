@@ -88,6 +88,7 @@ public class UserReservationActivity extends AppCompatActivity {
                                 String endDate = reservationObject.getString("end_date");
                                 double totalPrice = reservationObject.getDouble("total_price");
                                 String status = reservationObject.getString("status");
+                                double discount = reservationObject.getDouble("discount");
 
                                 // Only add the reservation if the status is "paid"
                                 if ("paid".equalsIgnoreCase(status) || "canceled".equalsIgnoreCase(status)){
@@ -98,7 +99,7 @@ public class UserReservationActivity extends AppCompatActivity {
                                     Log.d("UserReservationActivity", "Bike Image URL: " + bikeImageUrl);
 
                                     // Create Reservation object
-                                    Reservation reservation = new Reservation(reservationId, name, startDate, endDate, totalPrice, status, bikeImageUrl, bikeName, bikeId);
+                                    Reservation reservation = new Reservation(reservationId, name, startDate, endDate, totalPrice, status, bikeImageUrl, bikeName, bikeId, discount);
                                     reservationList.add(reservation);
                                 }
                             }
