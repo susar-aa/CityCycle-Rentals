@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -21,26 +22,25 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.citycyclerentals.adapters.DashboardReservationAdapter;  // Use DashboardReservationAdapter here
+import com.example.citycyclerentals.adapters.DashboardReservationAdapter;
 import com.example.citycyclerentals.models.Reservation;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    private static final String TAG = "HomeActivity";
+    private static final String TAG = "DashboardActivity";
     private static final String URL = "http://192.168.1.2/CityCycle%20Rentals/get_promotions.php";
     private ViewFlipper promoFlipper;
     private RequestQueue requestQueue;
     private ListView reservationListView;
     private ArrayList<Reservation> reservationList;
-    private DashboardReservationAdapter adapter;  // Use DashboardReservationAdapter here
+    private DashboardReservationAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,15 +186,16 @@ public class DashboardActivity extends AppCompatActivity {
                                     int bikeId = reservationObject.getInt("bike_id");
                                     String bikeImageUrl = reservationObject.getString("bike_image_url");
                                     String bikeName = reservationObject.getString("bike_name");
+                                    double discount = reservationObject.getDouble("discount");
 
                                     // Create Reservation object
-                                    Reservation reservation = new Reservation(reservationId, name, startDate, endDate, totalPrice, status, bikeImageUrl, bikeName, bikeId);
+                                    Reservation reservation = new Reservation(reservationId, name, startDate, endDate, totalPrice, status, bikeImageUrl, bikeName, bikeId, discount);
                                     reservationList.add(reservation);
                                 }
                             }
 
                             // Update the adapter with the filtered reservation list
-                            adapter = new DashboardReservationAdapter(DashboardActivity.this, reservationList);  // Use DashboardReservationAdapter here
+                            adapter = new DashboardReservationAdapter(DashboardActivity.this, reservationList);
                             reservationListView.setAdapter(adapter);
 
                             // Set item click listener

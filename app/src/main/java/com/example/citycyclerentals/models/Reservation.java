@@ -10,11 +10,10 @@ public class Reservation {
     private String bikeImageUrl;
     private String bikeName;
     private int bikeId;
-
     private double discount;
 
-    // Updated constructor with bikeName
-    public Reservation(int reservationId, String name, String startDate, String endDate, double totalPrice, String status, String bikeImageUrl,String bikeName, int bikeId) {
+    // Updated constructor with bikeName and discount
+    public Reservation(int reservationId, String name, String startDate, String endDate, double totalPrice, String status, String bikeImageUrl, String bikeName, int bikeId, double discount) {
         this.reservationId = reservationId;
         this.name = name;
         this.startDate = startDate;
